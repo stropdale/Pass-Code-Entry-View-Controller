@@ -1,6 +1,6 @@
 # Pass-Code-Entry-View-Controller
 
-![Alt text](https://media.giphy.com/media/BgNuBNJBnna48/giphy.gif)
+![Alt text](https://media.giphy.com/media/CWg2e0WYlAZsk/giphy.gif)
 
 A simple numeric pass code interface
 
