@@ -1,6 +1,6 @@
 # Pass-Code-Entry-View-Controller
 
-![Alt text](https://richardstockdale.files.wordpress.com/2017/04/ezgif-3-5a077b78a5.gif?w=299&h=223)
+![Alt text](https://media.giphy.com/media/BgNuBNJBnna48/giphy.gif)
 
 A simple numeric pass code interface
 
