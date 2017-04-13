@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSDPinEntryViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <JSPPinEntryDelegate>
 
 
 @end

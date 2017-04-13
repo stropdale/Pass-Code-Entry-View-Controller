@@ -64,6 +64,10 @@ static NSInteger pinMaxLength = 4;
 }
 
 - (IBAction)cancelTapped:(id)sender {
+    if (self.delegate) {
+        [self.delegate pinEntryCompleted:NO];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     self.pinString = nil;
 }
@@ -72,6 +76,10 @@ static NSInteger pinMaxLength = 4;
     if ([[self getPin] isEqualToString:self.pinString]) {
         self.infoLabel.text = @"Correct";
         self.infoLabel.textColor = [UIColor greenColor];
+        
+        if (self.delegate) {
+            [self.delegate pinEntryCompleted:YES];
+        }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -82,15 +90,6 @@ static NSInteger pinMaxLength = 4;
         self.infoLabel.textColor = [UIColor redColor];
         [self shakeTheView];
     }
-}
-
-- (void) shakeTheView {
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.x"];
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    animation.duration = 0.6;
-    animation.values = @[ @(-20), @(20), @(-20), @(20), @(-10), @(10), @(-5), @(5), @(0) ];
-    [self.infoLabel.layer addAnimation:animation forKey:@"shake"];
-    [self.pinEntryLabel.layer addAnimation:animation forKey:@"shake"];
 }
 
 #pragma mark - PIN Entry
@@ -155,6 +154,15 @@ static NSInteger pinMaxLength = 4;
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
+- (void) shakeTheView {
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.x"];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.duration = 0.6;
+    animation.values = @[ @(-20), @(20), @(-20), @(20), @(-10), @(10), @(-5), @(5), @(0) ];
+    [self.infoLabel.layer addAnimation:animation forKey:@"shake"];
+    [self.pinEntryLabel.layer addAnimation:animation forKey:@"shake"];
 }
 
 @end

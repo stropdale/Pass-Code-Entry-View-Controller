@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "JSDPinEntryViewController.h"
 
 @interface ViewController ()
 
@@ -31,9 +30,14 @@
 - (IBAction)showPinEntry:(id)sender {
     if (!self.pinPad) {
         self.pinPad = [[JSDPinEntryViewController alloc] init];
+        self.pinPad.delegate = self;
     }
     
     [self presentViewController:self.pinPad animated:YES completion:nil];
+}
+
+- (void) pinEntryCompleted: (BOOL) success {
+    NSLog(@"%@", success ? @"Pin entered correctly" : @"Pin cancelled");
 }
 
 @end
